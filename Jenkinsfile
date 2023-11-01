@@ -1,26 +1,22 @@
 pipeline {
     agent any
-
     stages {
-        stage('Clean') {
+        stage('Checkout') {
             steps {
-                // Clean the project
-                sh "mvn clean"
+                script {
+                    // Checkout the code from the repository
+                    checkout scm
+                }
             }
         }
-
         stage('Build') {
             steps {
-
-                // Build the Spring Boot application using Maven
-                sh "mvn build"
+                sh 'mvn clean package'
             }
         }
-
         stage('Test') {
             steps {
-                // Run tests
-                sh "mvn test"
+                sh 'mvn test'
             }
         }
     }
