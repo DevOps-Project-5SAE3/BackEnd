@@ -30,8 +30,8 @@ pipeline {
                 }
                 stage('Nexus Deployment') {
                             steps {
-                                // Deploy the Maven artifacts to Nexus Repository Manager
-                                sh "${MAVEN_HOME}/bin/mvn deploy -DskipTests"
+
+                                sh "mvn deploy -DskipTests"
                             }
                         }
     }
