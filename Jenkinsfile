@@ -23,7 +23,7 @@ pipeline {
             steps {
                 // Run the SonarQube analysis
                 withSonarQubeEnv('SonarQubeServer') {
-                    sh 'sonar-scanner'
+                    sh 'mvn sonar:sonar'
                 }
             }
         }
