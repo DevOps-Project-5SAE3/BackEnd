@@ -19,16 +19,13 @@ pipeline {
                 sh 'mvn test'
             }
         }
-       stage('SonarQube Analysis') {
-                  steps {
-                      // Run the SonarQube analysis
-                      withSonarQubeEnv('SonarQubeServer') {
-                          sh 'sonar-scanner'
-                      }
-                  }
-              }
-
-
+        stage('SonarQube Analysis') {
+            steps {
+                // Run the SonarQube analysis
+                withSonarQubeEnv('SonarQubeServer') {
+                    sh 'sonar-scanner'
+                }
+            }
         }
     }
 }
