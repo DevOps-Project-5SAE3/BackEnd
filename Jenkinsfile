@@ -14,16 +14,24 @@ pipeline {
                 sh 'mvn clean package'
             }
         }
-        stage('Test') {
+        stage('Test and JaCoCo Report') {
             steps {
-                sh 'mvn test'
+                sh 'mvn clean verify'
+            }
+            post {
+                always {
+                    script {
+                        sh 'mvn jacoco:report'
+                    }
+                }
             }
         }
         stage('SonarQube Analysis') {
             steps {
-                // Run the SonarQube analysis
                 withSonarQubeEnv('SonarQubeServer') {
-                    sh 'mvn sonar:sonar'
+                    script {
+                        sh 'mvn sonar:sonar'
+                    }
                 }
             }
         }
