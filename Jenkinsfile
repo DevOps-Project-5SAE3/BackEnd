@@ -14,26 +14,27 @@ pipeline {
                 sh 'mvn clean package'
             }
         }
-        stage('Test') {
+        stage('Test ') {
             steps {
                 sh 'mvn test'
             }
+
         }
         stage('SonarQube Analysis') {
                     steps {
-                        withSonarQubeEnv('SonarQubeServer') {
+                        withSonarQubeEnv('sonarqube_env') {
                             script {
                                 sh 'mvn sonar:sonar'
                             }
                         }
                     }
-                }
-                stage('Nexus Deployment') {
-                            steps {
+           }
 
-                                sh "mvn deploy -DskipTests"
-                            }
-                        }
+        stage('Nexus Deployment') {
+            steps {
+                sh "mvn deploy -DskipTests"
+                }
+        }
 
     }
 }
