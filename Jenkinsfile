@@ -50,7 +50,7 @@ pipeline {
                                  }
 
                                                 // Push the Docker image to your Nexus repository
-                                  sh "docker push http://192.168.0.8:8081/#browse/browse:maven-snapshots/yourimage:tag"
+                                  sh "docker push http://192.168.0.8:8081/#browse/browse:maven-snapshots/devops-0.0.1.jar"
                                    }
                                    }
     }
