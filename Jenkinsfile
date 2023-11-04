@@ -34,5 +34,24 @@ pipeline {
                                 sh "mvn deploy -DskipTests"
                             }
                         }
+                    stage('Building Docker image') {
+                                	   steps {
+                                		 script {
+                                			// Generating image from Dockerfile
+                                			  sh 'docker build -t rihabnasri/devops-0.0.1.jar .'
+                                			}
+                                		 }
+                                	    }
+                      stage('Push Docker Image to Nexus') {
+                            steps {
+                                                // Log in to your Nexus Docker registry with your credentials
+                                withCredentials([usernamePassword(credentialsId: 'nexus-credentials', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
+                                 sh "docker login -u $NEXUS_USERNAME -p $NEXUS_PASSWORD http://192.168.0.8:8081"
+                                 }
+
+                                                // Push the Docker image to your Nexus repository
+                                  sh "docker push http://192.168.0.8:8081/#browse/browse:maven-snapshots/yourimage:tag"
+                                   }
+                                   }
     }
 }
