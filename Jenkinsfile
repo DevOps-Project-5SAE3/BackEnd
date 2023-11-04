@@ -49,10 +49,10 @@ pipeline {
                                         withCredentials([usernamePassword(credentialsId: 'nexus-credentials', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
                                          sh "echo $NEXUS_PASSWORD | docker login -u $NEXUS_USERNAME --password-stdin http://192.168.0.8:8081"
                                         }
-                                 
+
 
                                                 // Push the Docker image to your Nexus repository
-                                  sh "docker push http://192.168.0.8:8081/#browse/browse:maven-snapshots/devops-0.0.1.jar"
+                                  sh "docker push http://192.168.0.8:8081/repository/docker-registry/devops-0.0.1.jar"
                                    }
                                    }
     }
