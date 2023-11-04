@@ -20,21 +20,9 @@ pipeline {
             }
 
         }
-        stage('SonarQube Analysis') {
-                    steps {
-                        withSonarQubeEnv('sonarqube_env') {
-                            script {
-                                sh 'mvn sonar:sonar'
-                            }
-                        }
-                    }
-           }
 
-        stage('Nexus Deployment') {
-            steps {
-                sh "mvn deploy -DskipTests"
-                }
-        }
+
+
 
     }
 }
