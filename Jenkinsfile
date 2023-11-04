@@ -47,7 +47,7 @@ pipeline {
 
                                              // Log in to your Nexus Docker registry with your credentials
                                         withCredentials([usernamePassword(credentialsId: 'nexus-credentials', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
-                                         sh "echo $NEXUS_PASSWORD | docker login -u $NEXUS_USERNAME --password-stdin http://192.168.0.8:8081"
+                                         sh "echo $NEXUS_PASSWORD | docker login -u $NEXUS_USERNAME --password-stdin 192.168.0.8:8081"
                                         }
 
 
