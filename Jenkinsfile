@@ -45,7 +45,7 @@ pipeline {
         	   steps {
         		 script {
         			// Generating image from Dockerfile
-        			  sh 'docker build -t fedii97/DevOps_Project-2.1.jar .'
+        			  sh 'docker build -t fedii97/devopsproject-0.0.1.jar .'
         			}
         		 }
         	    }
@@ -59,7 +59,7 @@ pipeline {
                 }
 
                 // Push the Docker image to Docker Hub
-                sh "docker push fedii97/DevOps_Project-2.1.jar"
+                sh "docker push fedii97/devopsproject-0.0.1.jar"
             }
         }
     }
