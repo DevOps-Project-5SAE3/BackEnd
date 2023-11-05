@@ -42,21 +42,27 @@ pipeline {
                                 			}
                                 		 }
                                 	    }
-                      stage('Push Docker Image to Nexus') {
-                            steps {
+                      stage('login Docker') {
 
-                                             // Log in to your Nexus Docker registry with your credentials
-                                        withCredentials([usernamePassword(credentialsId: 'nexus-credentials', usernameVariable: 'NEXUS_USERNAME', passwordVariable: 'NEXUS_PASSWORD')]) {
-                                            sh """
-                                            echo \${NEXUS_PASSWORD} | docker login -u \${NEXUS_USERNAME} --password-stdin 192.168.0.8:8081/repository/docker-registry
-                                            """
+                       script{
+                                      // Log in to Docker Hub with your credentials
+                                      withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                                          sh "docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD"
 
-                                        }
+                                  }
+                              }
+                              }
+                              stage('Push Docker image'){
+
+                                    script{
 
 
-                                                // Push the Docker image to your Nexus repository
-                                  sh "docker push http://192.168.0.8:8081/repository/docker-registry/devops-0.0.1.jar"
-                                   }
-                                   }
+                                          // Push the Docker image to Docker Hub
+                                        sh "docker push rihabnasri/devopsproject-0.0.1.jar"
+
+                                    }
+                              }
+
     }
+
 }
