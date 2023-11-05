@@ -59,7 +59,7 @@ pipeline {
 
 
                                           // Push the Docker image to Docker Hub
-                                        sh "docker push rihabnasri/devopsproject-0.0.1.jar"
+                                        sh "docker push rihabnasri/devops-0.0.1.jar"
                                         }
                                     }
                               }
