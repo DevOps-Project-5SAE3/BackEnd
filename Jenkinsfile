@@ -43,23 +43,24 @@ pipeline {
                                 		 }
                                 	    }
                       stage('login Docker') {
-
-                       script{
+                            steps {
+                                script{
                                       // Log in to Docker Hub with your credentials
                                       withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
                                           sh "docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD"
 
-                                  }
+                                     }
+                                   }
                               }
                               }
                               stage('Push Docker image'){
-
+                                  steps {
                                     script{
 
 
                                           // Push the Docker image to Docker Hub
                                         sh "docker push rihabnasri/devopsproject-0.0.1.jar"
-
+                                        }
                                     }
                               }
 
