@@ -2,7 +2,10 @@ package tn.esprit.devops_project.controllers;
 
 
 import lombok.AllArgsConstructor;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import tn.esprit.devops_project.DTO.stockDTO;
 import tn.esprit.devops_project.entities.Stock;
 import tn.esprit.devops_project.services.Iservices.IStockService;
 import java.util.List;
@@ -12,11 +15,17 @@ import java.util.List;
 @AllArgsConstructor
 public class StockController {
 
+    @Autowired
     IStockService stockService;
 
+    @Autowired
+    private ModelMapper modelMapper;
     @PostMapping("/stock")
-    Stock addStock(@RequestBody Stock stock){
-        return stockService.addStock(stock);
+    stockDTO addStock(@RequestBody stockDTO stock){
+
+        Stock stock1 = modelMapper.map(stock,Stock.class);
+        Stock stock2 = stockService.addStock(stock1);
+        return modelMapper.map(stock2, stockDTO.class);
     }
 
     @GetMapping("/stock/{id}")
