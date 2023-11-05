@@ -1,0 +1,24 @@
+version: "3"
+services:
+  springboot-app:
+    # container_name: spring-app
+    image: fatmambarek/back-end:2.0.0
+    restart: always
+    build: .
+    ports:
+      - 8066:8082
+    environment:
+      MYSQL_HOST: mysqldb
+      MYSQL_USER: root
+      MYSQL_PASSWORD:
+      MYSQL_PORT: 3306
+  mysqldb:
+    container_name: mysqldb
+    image: mysql
+    volumes:
+      -  :/var/lib/mysql
+    ports:
+      - 3307:3306
+    environment:
+      MYSQL_DATABASE: devops
+      MYSQL_ROOT_PASSWORD: root
