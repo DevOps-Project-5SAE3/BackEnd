@@ -23,11 +23,11 @@ stage('Run Sonar')  {
                     sh 'mvn sonar:sonar -Dsonar.host.url=http://192.168.1.3:9000/ -Dsonar.login=$SONAR_TOKEN'
                 }
             }
-        
+
 
         stage('Run Tests') {
             steps {
                 sh 'mvn test'
             }
-
+}
 }}
