@@ -24,10 +24,10 @@ stage('Run Sonar')  {
                 }
             }
 
-
+}
         stage('Run Tests') {
             steps {
                 sh 'mvn test'
             }
-}
+
 }}
