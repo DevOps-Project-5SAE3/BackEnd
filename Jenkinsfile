@@ -62,5 +62,10 @@ pipeline {
                 sh "docker push fedii97/devopsproject-0.0.1.jar"
             }
         }
+        stage('Docker compose') {
+                    steps {
+                        sh 'docker-compose -f docker-compose.yml up -d --build'
+                    }
+                }
     }
 }

@@ -40,7 +40,7 @@ public class DeleteProductTest {
 
         @Test
         public void testDeleteExistingProduct() {
-            long existingProductId = 1; // Use a product ID that exists
+            long existingProductId = 2; // Use a product ID that exists
 
             // Act: Perform the operation being tested
             productService.deleteProduct(existingProductId);
