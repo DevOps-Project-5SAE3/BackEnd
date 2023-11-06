@@ -12,7 +12,7 @@ pipeline {
             }
         }
         stage('compiling project') {
-            script {
+            steps {
                 sh 'mvn compile'
             }
 }
