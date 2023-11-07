@@ -1,40 +1,62 @@
 pipeline {
     agent any
-    stages {
-        stage('Checkout') {
-            steps {
-                script {
-                    // Checkout the code from the repository
-                    checkout scm
+
+        stages {
+            stage('CHECKOUT CODE') {
+                steps {
+                    script {
+                        echo 'Getting Project From Git'
+                        checkout scm
+                    }
                 }
             }
-        }
-        stage('Build') {
-            steps {
-                sh 'mvn clean package'
-            }
-        }
-        stage('Test ') {
-            steps {
-                sh 'mvn test'
+
+             stage('CLEAN') {
+                steps {
+                    echo 'CLEANING PROJECT'
+                    sh 'mvn clean'
+                }
+             }
+
+            stage('COMPILE') {
+                steps {
+                    echo 'COMPILING CODE'
+                    sh 'mvn compile'
+                }
             }
 
-        }
-        stage('SonarQube Analysis') {
-                    steps {
-                        withSonarQubeEnv('sonarqube_env') {
-                            script {
-                                sh 'mvn sonar:sonar'
-                            }
+            stage('TEST') {
+                steps {
+                    echo 'RUNNING TESTS'
+                    sh 'mvn test'
+                }
+            }
+
+            stage('PACKAGE') {
+                steps {
+                    echo 'PACKAGING ARTIFACT'
+                    sh 'mvn package'
+                }
+            }
+
+             stage('SONARQUBE') {
+                 steps {
+                    withSonarQubeEnv('sonarqube_env') {
+                        script {
+                            echo 'SONARQUBE ANALYSIS'
+                            sh 'mvn sonar:sonar'
                         }
                     }
-           }
+                 }
+             }
 
-        stage('Nexus Deployment') {
-            steps {
-                sh "mvn deploy -DskipTests"
+            stage('NEXUS') {
+                steps {
+                    echo 'NEXUS DEPLOYMENT'
+                    sh "mvn deploy"
                 }
-        }
+            }
 
-    }
+
+        }
 }
