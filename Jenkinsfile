@@ -22,11 +22,14 @@ pipeline {
                 }
             }
 
-                post {
-                always{
-                cleanWs()
-                }
-                 }
+            stage{
+            post {
+                            always{
+                            cleanWs()
+                            }
+                             }
+            }
+
 
     }
     }
