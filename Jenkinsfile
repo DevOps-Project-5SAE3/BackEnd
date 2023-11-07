@@ -35,7 +35,22 @@ pipeline {
             steps {
                 sh "mvn deploy -DskipTests"
             }
-        } 
+        }
+
+        stage('Docker Hub') {
+                    steps {
+                     script {
+                    // Define your Docker access token
+                          def dockerAccessToken = 'dckr_pat_OilxKdqMBcYlEt1aesNuW2oQxvM'
+
+                    // Log in to Docker Hub with --password-stdin
+                            sh "echo '${dockerAccessToken}' | docker login -u bougacha10 --password-stdin"
+                    // Tag and push the Docker image
+                            sh "docker tag devops bougacha10/devops_project_2.1 ."
+                            sh "docker push bougacha10/devops_project_2.1 ."
+                    }
+                    }
+                }
 
 
     }
