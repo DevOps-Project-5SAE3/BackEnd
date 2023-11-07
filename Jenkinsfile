@@ -11,13 +11,20 @@ pipeline {
             }
         }
 
-        stage('Build') {
+        stage('CLEAN') {
+           steps {
+              echo 'CLEANING PROJECT'
+              sh 'mvn clean'
+           }
+        }
+
+        stage('COMPILE AND PACKAGE') {
             steps {
                 sh 'mvn clean package'
             }
         }
 
-        stage('Test') {
+        stage('TEST') {
             steps {
                 sh 'mvn test'
             }
@@ -34,13 +41,15 @@ pipeline {
             }
         }
 
-        stage('NEXUS') {
+
+
+       /* stage('NEXUS') {
             steps {
                 script {
                     echo 'Deploying to Nexus'
                     sh "mvn deploy -DskipTests"
                 }
             }
-        }
+        }*/
     }
 }
