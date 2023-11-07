@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     stages {
-        stage('CHECKOUT CODE') {
+        stage('GETTING CODE FROM GIT') {
             steps {
                 script {
                     echo 'Getting Project From Git'
@@ -24,11 +24,16 @@ pipeline {
             }
         }
 
-        stage('TEST') {
-            steps {
-                sh 'mvn test'
+        stage('JUNIT/MOCKITO TEST') {
+                steps {
+                    sh 'mvn test'
+                }
+                post {
+                    always {
+                        junit '**/target/surefire-reports/*.xml'
+                    }
+                }
             }
-        }
 
         stage('SONARQUBE') {
             steps {
