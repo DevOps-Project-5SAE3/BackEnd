@@ -11,33 +11,19 @@ pipeline {
                 }
             }
 
-             stage('CLEAN') {
-                steps {
-                    echo 'CLEANING PROJECT'
-                    sh 'mvn clean'
-                }
-             }
+             stage('Build') {
+                         steps {
+                             sh 'mvn clean package'
+                         }
+                     }
 
-            stage('COMPILE') {
-                steps {
-                    echo 'COMPILING CODE'
-                    sh 'mvn compile'
-                }
-            }
+                     stage('Test') {
+                         steps {
+                             sh 'mvn test'
+                         }
+                     }
 
-            stage('TEST') {
-                steps {
-                    echo 'TESTING'
-                    sh 'mvn test'
-                }
-            }
 
-            stage('PACKAGE') {
-                steps {
-                    echo 'PACKAGING ARTIFACT'
-                    sh 'mvn package'
-                }
-            }
 
              stage('SONARQUBE') {
                  steps {
@@ -51,8 +37,7 @@ pipeline {
              }
 
             stage('NEXUS') {
-                steps {
-                    echo 'NEXUS DEPLOYMENT'
+                steps
                     sh "mvn deploy -DskipTests"
                 }
             }
