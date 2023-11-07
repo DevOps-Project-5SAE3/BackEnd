@@ -19,8 +19,8 @@ pipeline {
 }
 stage('Run Sonar')  {
             steps {
-                withCredentials([string(credentialsId: 'squ_6353e71b9fdd22953689fc0263e250626178ed35', variable: 'SONAR_TOKEN')]) {
-                    sh 'mvn sonar:sonar -Dsonar.host.url=http://192.168.1.3:9000/ -Dsonar.login=$SONAR_TOKEN'
+                withCredentials([string(credentialsId: 'squ_6353e71b9fdd22953689fc0263e250626178ed35', variable: 'toktok')]) {
+                    sh 'mvn sonar:sonar -Dsonar.host.url=http://192.168.1.3:9000/ -Dsonar.login=$toktok'
                 }
             }
       }
