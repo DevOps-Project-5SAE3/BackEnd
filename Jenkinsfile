@@ -22,13 +22,7 @@ pipeline {
                 }
             }
 
-            stage{
-            post {
-                            always{
-                            cleanWs()
-                            }
-                             }
-            }
+      
 
 
     }
