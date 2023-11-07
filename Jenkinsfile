@@ -22,6 +22,14 @@ pipeline {
                 }
             }
 
+            stage('Run Sonar')  {
+                        steps {
+                            withCredentials([string(credentialsId: 'sonar', variable: 'SONAR_TOKEN')]) {
+                                sh 'mvn sonar:sonar -Dsonar.host.url=http://192.168.33.10:9000/ -Dsonar.login=$SONAR_TOKEN'
+                            }
+                        }
+                    }
+
       
 
 
