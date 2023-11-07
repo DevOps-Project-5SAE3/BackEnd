@@ -36,15 +36,31 @@
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
+        <!-- Spring Boot Starter Test provides support for testing Spring Boot applications with JUnit 5 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <!-- JUnit 5 Jupiter API for writing tests -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.8.2</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- JUnit 5 Jupiter Engine to run tests -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>5.8.2</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- Mockito for creating mocks in tests -->
         <dependency>
             <groupId>org.mockito</groupId>
-            <artifactId>mockito-core</artifactId>
-            <version>5.6.0</version>
+            <artifactId>mockito-junit-jupiter</artifactId>
+            <version>3.11.2</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -72,12 +88,17 @@
                     </excludes>
                 </configuration>
             </plugin>
+            <!-- Maven Surefire Plugin for running tests -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.22.2</version>
+                <version>3.0.0-M5</version>
                 <configuration>
-                    <argLine>-Dspring.config.location=classpath:/application.properties</argLine>
+                    <argLine>-Xmx1024m</argLine> <!-- Configuring JVM options for tests -->
+                    <useSystemClassLoader>false</useSystemClassLoader> <!-- Avoid classpath issues -->
+                    <includes>
+                        <include>**/*Test.java</include> <!-- Include all test classes named *Test.java -->
+                    </includes>
                 </configuration>
             </plugin>
         </plugins>
