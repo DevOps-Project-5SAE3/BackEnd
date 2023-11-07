@@ -2,7 +2,7 @@ pipeline {
     agent any
     stages {
 
-    stages {
+   
         stage('Checkout') {
             steps {
                 // Étape pour récupérer le code source depuis le référentiel Git
