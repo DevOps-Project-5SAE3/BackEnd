@@ -1,17 +1,20 @@
 pipeline {
     agent any
     stages {
+
+    stages {
         stage('Checkout') {
             steps {
-                script {
-                    // Checkout the code from the repository
-                    checkout scm
-                }
+                // Étape pour récupérer le code source depuis le référentiel Git
+                checkout([$class: 'GitSCM', branches: [[name: '*/bougacha']], userRemoteConfigs: [[url: 'https://github.com/DevOps-Project-5SAE3/BackEnd.git']]])
             }
         }
         stage('Build') {
             steps {
-                sh 'mvn clean package'
+                script{
+                    sh 'mvn --version'
+                    sh 'mvn clean package -DiskpTests'
+                }
             }
         }
         stage('Test') {
@@ -20,21 +23,12 @@ pipeline {
             }
         }
 
-        stage('SonarQube Analysis') {
-                    steps {
-                        withSonarQubeEnv('SonarQubeServer') {
-                            script {
-                                sh 'mvn sonar:sonar'
-                            }
-                        }
-                    }
+        post {
+                always {
+                    cleanWs()
                 }
+            }
 
-         stage('Nexus Deployment') {
-                    steps {
-                    sh "mvn deploy -DskipTests"
-                      }
-                    }
 
     }
 }
