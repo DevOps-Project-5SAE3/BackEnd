@@ -1,0 +1,16 @@
+version: '3'
+services:
+  db:
+    image: my-sql-image:latest
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: mysecretpassword
+      MYSQL_DATABASE: mydatabase
+
+  spring-app:
+    image: my-spring-image:latest
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
