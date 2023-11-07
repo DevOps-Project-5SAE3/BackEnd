@@ -46,8 +46,8 @@ pipeline {
                     // Log in to Docker Hub with --password-stdin
                             sh "echo '${dockerAccessToken}' | docker login -u bougacha10 --password-stdin"
                     // Tag and push the Docker image
-                         
-                            sh "docker push bougacha10/devops_project_2.1 ."
+
+                            sh "docker push bougacha10/devops_project_2.1.jar ."
                     }
                     }
                 }
