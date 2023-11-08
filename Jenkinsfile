@@ -67,5 +67,16 @@ pipeline {
                         sh 'docker-compose -f docker-compose.yml up -d --build'
                     }
                 }
+        
+        stage('Send Email Notification') {
+            steps {
+                emailext(
+                    subject: "Build Status: ${currentBuild.result}",
+                    body: "Build URL: ${env.BUILD_URL}\n\nCheck console output at ${env.BUILD_URL} to view the results.",
+                    to: 'fedijallali1@gmail.com',
+                    recipientProviders: [[$class: 'CulpritsRecipientProvider']]
+                )
+            }
+        }
     }
 }
