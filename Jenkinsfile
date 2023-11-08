@@ -68,7 +68,10 @@ pipeline {
                     }
                 }
         
-         post {
+       
+    
+    }
+      post {
         failure {
             steps {
                 emailext(
@@ -80,6 +83,4 @@ pipeline {
                    }
                  }
          }
-    
-    }
 }
