@@ -37,6 +37,26 @@ stage('Run Sonar')  {
                     sh "mvn deploy -DskipTests"
                 }
             }
+                 stage('Unit Tests') {
+                        steps {
+                            sh './gradlew test'
+                        }
+                    }
+
+                    stage('JaCoCo Code Coverage') {
+                        steps {
+                            sh './gradlew test jacocoTestReport'
+                        }
+                    }
+                }
+
+                post {
+                    success {
+                        archiveArtifacts(artifacts: 'build/libs/*.jar', allowEmptyArchive: true)
+                        junit '**/build/test-results/test/*.xml'
+                        publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: 'build/reports/jacoco/test/html', reportFiles: 'index.html', reportName: 'JaCoCo Code Coverage Report'])
+                    }
+                }
 
 
 }}
