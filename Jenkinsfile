@@ -60,6 +60,13 @@ pipeline {
                     }
                     }
                 }
+                stage('tests JUnit ici avec Mockito') {
+                            steps {
+                                sh "mvn test"  // Exécutez vos tests JUnit ici avec Mockito
+
+                                sh "mvn jacoco:report"
+                            }
+                        }
 
 
     }
