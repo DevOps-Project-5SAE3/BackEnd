@@ -65,9 +65,9 @@ pipeline {
                               }
                               stage('Docker compose') {
                                           steps {
-                                          dir('C:/Users/Rihab/Desktop/5SAE3/Devops/DevOps_Project-main/DevOps_Project/docker-compose.yml') {
+
                                            sh 'docker-compose -f docker-compose.yml up -d --build'
-                                           }
+                                           
 
                                           }
 
