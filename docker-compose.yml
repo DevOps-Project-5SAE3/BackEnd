@@ -12,7 +12,7 @@ services:
   backend:
     depends_on:
       - mysqldatabase
-    build: ./
+    image: rihabnasri/devops-0.0.1.jar
     restart: on-failure
     ports:
       - "8090:8082"
