@@ -1,6 +1,6 @@
 version: '3'
 services:
-  bougachalocal:
+  fatmadatabase:
     image: mysql:latest
     environment:
       - MYSQL_ROOT_PASSWORD=root
@@ -11,7 +11,7 @@ services:
       - db:/var/lib/mysql
   backend:
     depends_on:
-      - bougachalocal
+      - fatmadatabase
     build: ./
     restart: on-failure
     ports:
