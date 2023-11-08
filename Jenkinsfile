@@ -20,7 +20,7 @@ pipeline {
 
         stage('COMPILE AND PACKAGE') {
             steps {
-                sh 'mvn clean package'
+                sh 'mvn package'
             }
         }
 
@@ -28,12 +28,7 @@ pipeline {
                 steps {
                     sh 'mvn test'
                 }
-                post {
-                    always {
-                        junit '**/target/surefire-reports/TEST-*.xml'
-                    }
-                }
-            }
+        }
 
         stage('SONARQUBE') {
             steps {
@@ -46,15 +41,13 @@ pipeline {
             }
         }
 
-
-
-       /* stage('NEXUS') {
+        stage('NEXUS') {
             steps {
                 script {
                     echo 'Deploying to Nexus'
                     sh "mvn deploy -DskipTests"
                 }
             }
-        }*/
+        }
     }
 }
