@@ -57,23 +57,24 @@ pipeline {
             }
         }
 
-         stage('BUILD DOCKER IMAGE') {
-            steps {
-                script {
-                    sh "docker build -t '$imageName' -f '$dockerfile' ."
-                }
-            }
-         }
+         stage('Build Docker Image Back-End et push sur DockerHub') {
+             steps {
+                 script {
+                     def DOCKERHUB_USERNAME= "cyrinealoui"
+                     def DOCKERHUB_TOKEN= "dckr_pat_vfTG20RYAQdxtCXFmEjRjDdv8MQ"
+                     def imageName = "'${DOCKERHUB_USERNAME}'/devops-project-2.1:2.0.0"
+                     def dockerfile = 'Dockerfile'
 
-         stage('PUSH DOCKER IMAGE') {
-            steps {
-                script {
-                    sh "docker login -u '${DOCKERHUB_USERNAME}' -p '${DOCKERHUB_TOKEN}'"
+                     sh "docker login -u '${DOCKERHUB_USERNAME}' -p '${DOCKERHUB_TOKEN}'"
 
-                    sh "docker push '$imageName'"
-                }
-            }
-         }
+                     sh "docker build -t '$imageName' -f '$dockerfile' ."
+
+                     sh "docker push '$imageName'"
+
+                     sh "docker logout"
+                 }
+              }
+             }
 
 
     }
