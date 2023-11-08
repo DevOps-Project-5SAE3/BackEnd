@@ -1,24 +1,24 @@
-version: "3"
+version: '3'
 services:
-  springboot-app:
-    # container_name: spring-app
-    image: fatmambarek/devops-project-2.1-back-end:2.0.0
-    restart: always
-    build: .
-    ports:
-      - 8066:8089
+  fatmadatabase:
+    image: mysql:latest
     environment:
-      MYSQL_HOST: mysqldb
-      MYSQL_USER: root
-      MYSQL_PASSWORD:
-      MYSQL_PORT: 3306
-  mysqldb:
-    container_name: mysqldb
-    image: mysql
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=devops
+    ports:
+      - "3307:3306"
     volumes:
-      -  /home/devops/db:/var/lib/mysql
+      - db:/var/lib/mysql
+  backend:
+    depends_on:
+      - mysqldatabase
+    build: ./
+    restart: on-failure
     ports:
-      - 3307:3306
-    environment:
-      MYSQL_DATABASE: devops
-      MYSQL_ROOT_PASSWORD: root
+      - "8090:8082"
+    stdin_open: true
+    tty: true
+    volumes:
+      - .m2:/root/.m2
+volumes:
+  db:
