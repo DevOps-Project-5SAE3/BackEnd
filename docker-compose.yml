@@ -1,17 +1,17 @@
 version: '3'
 services:
-  mysqldb:
+  cyrinedb:
     image: mysql:latest
     environment:
       - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_DATABASE=devopsdb
+      - MYSQL_DATABASE=devopsproject
     ports:
       - "3307:3306"
     volumes:
       - db:/var/lib/mysql
   backend:
     depends_on:
-      - mysqldb
+      - cyrinedb
     build: ./
     restart: on-failure
     ports:
