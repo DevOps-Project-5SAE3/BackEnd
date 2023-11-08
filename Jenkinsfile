@@ -37,6 +37,15 @@ pipeline {
             }
         }
 
+        stage('Building Docker image') {
+                	   steps {
+                		 script {
+                			// Generating image from Dockerfile
+                			  sh 'docker build -t bougacha10/devops_project_2.1.jar .'
+                			}
+                		 }
+                	    }
+
         stage('Docker Hub') {
                     steps {
                      script {
@@ -47,7 +56,7 @@ pipeline {
                             sh "echo '${dockerAccessToken}' | docker login -u bougacha10 --password-stdin"
                     // Tag and push the Docker image
 
-                            sh "docker push bougacha10/devops_project_2.1.jar ."
+                            sh "docker push bougacha10/devops_project_2.1.jar"
                     }
                     }
                 }
