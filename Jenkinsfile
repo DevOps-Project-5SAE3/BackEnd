@@ -63,16 +63,11 @@ pipeline {
                                         }
                                     }
                               }
-                               stage('Docker Compose') {
+                              stage('Docker compose') {
                                           steps {
-                                              script {
-                                                  // Navigate to the directory where docker-compose.yml is located
-                                                  dir('C:/Users/Rihab/Desktop/5SAE3/Devops/DevOps_Project-main/DevOps_Project') {
-                                                      // Run docker-compose up command
-                                                      sh 'docker-compose up -d'
-                                                  }
-                                              }
+                                              sh 'docker-compose -f docker-compose.yml up -d --build'
                                           }
+                                      }
                                       }
 
     }
