@@ -77,7 +77,9 @@ pipeline {
                     to: 'fedijallali1@gmail.com',
                     recipientProviders: [[$class: 'CulpritsRecipientProvider']]
                 )
-            }
-        }
+                   }
+                 }
+             ]
+    
     }
 }
