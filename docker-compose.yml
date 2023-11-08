@@ -11,7 +11,7 @@ services:
       - db:/var/lib/mysql
   backend:
     depends_on:
-      - mysqldb
+      - mysqldatabase
     build: ./
     restart: on-failure
     ports:
