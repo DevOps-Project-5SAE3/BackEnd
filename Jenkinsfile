@@ -1,6 +1,13 @@
 pipeline {
     agent any
 
+    environment {
+            DOCKERHUB_USERNAME = credentials('cyrinealoui')
+            DOCKERHUB_TOKEN = credentials('dckr_pat_bV_2LSNoS0lIfB093dVHXgciMAI')
+            IMAGE_NAME = "${DOCKERHUB_USERNAME}/devops-project-2.1:2.0.0.jar"
+            DOCKERFILE = 'Dockerfile'
+        }
+
     stages {
         stage('GETTING CODE FROM GIT') {
             steps {
@@ -49,5 +56,26 @@ pipeline {
                 }
             }
         }
+
+         stage('BUILD DOCKER IMAGE') {
+            steps {
+                script {
+                    sh "docker build -t ${IMAGE_NAME} -f ${DOCKERFILE} ."
+                }
+            }
+         }
+
+         stage('PUSH DOCKER IMAGE') {
+            steps {
+                script {
+                    sh "docker login -u ${DOCKERHUB_USERNAME} -p ${DOCKERHUB_TOKEN}"
+                    sh "docker push ${IMAGE_NAME}"
+                }
+            }
+         }
+
+
     }
 }
+
+
