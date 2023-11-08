@@ -71,16 +71,11 @@ pipeline {
        
     
     }
-      post {
-        failure {
-            steps {
-                emailext(
-                    subject: "Build Failed: ${currentBuild.result}",
-                    body: "Build URL: ${env.BUILD_URL}\n\nCheck console output at ${env.BUILD_URL} to view the results.",
-                    to: 'fedijallali1@gmail.com',
-                    recipientProviders: [[$class: 'CulpritsRecipientProvider']]
-                )
-                   }
-                 }
-         }
+        post{
+        always{
+            mail to: "fedijallali1@gmail.com",
+            subject: "Test Email",
+            body: "Test"
+        }
+    }
 }
