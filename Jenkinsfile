@@ -51,7 +51,7 @@ pipeline {
             }
         }
 
-         stage('Build Docker Image Back-End et push sur DockerHub') {
+         stage('BUILD AND PUSH IMAGE') {
              steps {
                  script {
                      def DOCKERHUB_USERNAME= "cyrinealoui"
@@ -67,14 +67,14 @@ pipeline {
 
                      sh "docker logout"
                  }
-              }
              }
+         }
 
-                     stage('Docker compose') {
-                                 steps {
-                                     sh 'docker-compose -f docker-compose.yml up -d --build'
-                                 }
-                             }
+         stage('DOCKER COMPOSE') {
+            steps {
+                sh 'docker-compose -f docker-compose.yml up -d --build'
+            }
+         }
 
 
 
