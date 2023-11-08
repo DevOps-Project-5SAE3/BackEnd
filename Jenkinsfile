@@ -60,7 +60,7 @@ pipeline {
          stage('BUILD DOCKER IMAGE') {
             steps {
                 script {
-                    sh "docker build -t ${IMAGE_NAME} -f ${DOCKERFILE} ."
+                    sh "docker build -t '$imageName' -f '$dockerfile' ."
                 }
             }
          }
@@ -68,8 +68,9 @@ pipeline {
          stage('PUSH DOCKER IMAGE') {
             steps {
                 script {
-                    sh "docker login -u ${DOCKERHUB_USERNAME} -p ${DOCKERHUB_TOKEN}"
-                    sh "docker push ${IMAGE_NAME}"
+                    sh "docker login -u '${DOCKERHUB_USERNAME}' -p '${DOCKERHUB_TOKEN}'"
+
+                    sh "docker push '$imageName'"
                 }
             }
          }
@@ -77,5 +78,6 @@ pipeline {
 
     }
 }
+
 
 
