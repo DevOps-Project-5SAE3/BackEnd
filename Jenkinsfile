@@ -68,6 +68,15 @@ pipeline {
                             }
                         }
 
+        stage('docker comose') {
+            steps {
+                sh "cd  /var/lib/jenkins/workspace/Ahmed_BOUGACHA_5SAE3/target"
+                sh "docker compose up -d"
+            }
+        }
+
+
+
 
     }
     }
