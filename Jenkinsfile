@@ -1,12 +1,6 @@
 pipeline {
     agent any
 
-    environment {
-            DOCKERHUB_USERNAME = credentials('cyrinealoui')
-            DOCKERHUB_TOKEN = credentials('dckr_pat_vfTG20RYAQdxtCXFmEjRjDdv8MQ')
-            IMAGE_NAME = "${DOCKERHUB_USERNAME}/devops-project-2.1:2.0.0.jar"
-            DOCKERFILE = 'Dockerfile'
-        }
 
     stages {
         stage('GETTING CODE FROM GIT') {
