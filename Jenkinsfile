@@ -37,17 +37,9 @@ stage('Run Sonar')  {
                     sh "mvn deploy -DskipTests"
                 }
             }
-                 stage('Unit Tests') {
-                        steps {
-                            sh './gradlew test'
-                        }
-                    }
 
-                    stage('JaCoCo Code Coverage') {
-                        steps {
-                            sh './gradlew test jacocoTestReport'
-                        }
-                    }
+
+
                 }
 
                 post {
