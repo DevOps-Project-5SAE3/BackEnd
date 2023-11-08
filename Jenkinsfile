@@ -17,6 +17,13 @@ pipeline {
             }
 
 }
+stage('tests JUnit Mockito') {
+            steps {
+                sh "mvn test"  
+
+                sh "mvn jacoco:report"
+            }
+        }
 stage('Run Sonar')  {
             steps {
                 withCredentials([string(credentialsId: 'sonar', variable: 'SONAR_TOKEN')]) {
@@ -42,13 +49,7 @@ stage('Run Sonar')  {
 
                 }
 
-                post {
-                    success {
-                        archiveArtifacts(artifacts: 'build/libs/*.jar', allowEmptyArchive: true)
-                        junit '**/build/test-results/test/*.xml'
-                        publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: 'build/reports/jacoco/test/html', reportFiles: 'index.html', reportName: 'JaCoCo Code Coverage Report'])
-                    }
-                }
+
 
 
 }
