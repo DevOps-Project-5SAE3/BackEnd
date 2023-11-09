@@ -17,7 +17,7 @@ pipeline {
             }
 
 }
-stage('tests JUnit Mockito') {
+stage('JUnit Test') {
             steps {
                 sh "mvn test"
 
@@ -33,12 +33,6 @@ stage('Run Sonar')  {
       }
 
 
-        stage('Run Tests') {
-            steps {
-                sh 'mvn test'
-            }
-
-	}
 	stage("Deploy Artifact to Nexus") {
                 steps {
                     sh "mvn deploy -DskipTests"
