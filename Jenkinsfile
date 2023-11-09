@@ -25,9 +25,9 @@ pipeline {
             }
         }
 
-        stage('JUNIT/MOCKITO TEST') {
+        stage('JUNIT TEST') {
                 steps {
-                    sh 'mvn test'
+                    sh 'mvn clean test jacoco:report'
                 }
         }
 
