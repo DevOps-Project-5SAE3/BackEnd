@@ -1,21 +1,21 @@
 version: '3'
 services:
-  fatmadatabase:
+  bougacha:
     image: mysql:latest
     environment:
       - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_DATABASE=devops
+      - MYSQL_DATABASE=devopsbouga
     ports:
-      - "3307:3306"
+      - "3308:3306"
     volumes:
       - db:/var/lib/mysql
   backend:
     depends_on:
-      - fatmadatabase
+      - bougacha
     build: ./
     restart: on-failure
     ports:
-      - "8090:8082"
+      - "8094:8089"
     stdin_open: true
     tty: true
     volumes:
