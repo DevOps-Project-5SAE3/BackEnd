@@ -15,7 +15,7 @@ services:
     image: fatmambarek/devops-project-2.1-back-end:2.0.0
     restart: on-failure
     ports:
-      - "8090:8082"
+      - "8095:8082"
     stdin_open: true
     tty: true
     volumes:
