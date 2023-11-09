@@ -40,7 +40,7 @@ stage('Run Sonar')  {
             }
             stage('Docker Build and Push') {
                                    steps {
-                                           withDockerRegistry([credentialsId: "docker", url: ""]) {
+                                           withDockerRegistry([credentialsId: "docker", url: "https://hub.docker.com/u/salmaaz"]) {
                      			  sh 'printenv'
                     			  sh 'docker build -t salmaaz01/devopsproject .'
             	 			  sh 'docker tag salmaaz01/devopsproject salmaaz01/devopsproject:latest'
