@@ -88,21 +88,6 @@
                     </excludes>
                 </configuration>
             </plugin>
-            <!-- Maven Surefire Plugin for running tests -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.0.0-M5</version>
-                <configuration>
-                    <argLine>-Xmx1024m</argLine> <!-- Configuring JVM options for tests -->
-                    <useSystemClassLoader>false</useSystemClassLoader> <!-- Avoid classpath issues -->
-                    <includes>
-                        <include>**/*Test.java</include> <!-- Include all test classes named *Test.java -->
-                    </includes>
-                </configuration>
-            </plugin>
-
-            <!-- Jacoco-->
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
@@ -121,6 +106,10 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.22.2</version>
             </plugin>
         </plugins>
     </build>
