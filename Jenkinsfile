@@ -43,7 +43,7 @@ stage('Run Sonar')  {
                                            withDockerRegistry([credentialsId: "docker", url: ""]) {
                      			  sh 'printenv'
                     			  sh 'docker build -t salmaaz01/devopsproject .'
-            	 			  sh 'docker tag salmaaz01/kaddemproject salmaaz01/devopsproject:latest'
+            	 			  sh 'docker tag salmaaz01/devopsproject salmaaz01/devopsproject:latest'
                      			  sh 'docker push salmaaz01/devopsproject:latest'
                      			}
                  			  }
