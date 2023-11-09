@@ -62,6 +62,13 @@ pipeline {
                         sh 'docker-compose -f docker-compose.yml up -d --build'
                     }
                 }
+        stage('Prometheus And Grafana'){
+                    steps {
+
+                        sh "docker start prometheus"
+                	    sh "docker start grafana"
+                		}
+                	}
         
        
     
