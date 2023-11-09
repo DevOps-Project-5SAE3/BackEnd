@@ -1,18 +1,14 @@
 package tn.esprit.devops_project.services;
 import org.junit.jupiter.api.Test; // Pour annoter les méthodes de test
-import org.junit.jupiter.api.BeforeEach; // Pour annoter les méthodes d'initialisation avant chaque test
-import org.junit.jupiter.api.AfterEach; // Pour annoter les méthodes de nettoyage après chaque test
-import org.junit.jupiter.api.BeforeAll; // Pour annoter les méthodes d'initialisation avant tous les tests
-import org.junit.jupiter.api.AfterAll; // Pour annoter les méthodes de nettoyage après tous les tests
+
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.runner.RunWith;
+
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+
 import org.mockito.junit.jupiter.MockitoExtension;
 import tn.esprit.devops_project.entities.Invoice;
-import tn.esprit.devops_project.entities.Operator;
-import tn.esprit.devops_project.entities.Supplier;
+
 import tn.esprit.devops_project.repositories.InvoiceRepository;
 import tn.esprit.devops_project.repositories.OperatorRepository;
 import tn.esprit.devops_project.repositories.SupplierRepository;
@@ -32,11 +28,7 @@ import static org.mockito.Mockito.when;
         @Mock
         private InvoiceRepository invoiceRepository;
 
-        @Mock
-        private OperatorRepository operatorRepository;
 
-        @Mock
-        private SupplierRepository supplierRepository;
 
         @Test
         public void testRetrieveAllInvoices() {
@@ -80,45 +72,11 @@ import static org.mockito.Mockito.when;
             assertEquals(invoice, retrievedInvoice);
         }
 
-      /*  @Test
-        public void testGetInvoicesBySupplier() {
-            Long supplierId = 1L;
-            Supplier supplier = new Supplier();
-            Invoice invoice1 = new Invoice();
-            Invoice invoice2 = new Invoice();
-
-            // Configurez le comportement du mock SupplierRepository
-            when(supplierRepository.findById(supplierId)).thenReturn(Optional.of(supplier));
-            when(supplier.getInvoices()).thenReturn((Set<Invoice>) Arrays.asList(invoice1, invoice2));
-
-            List<Invoice> invoices = invoiceService.getInvoicesBySupplier(supplierId);
-
-            // Effectuez des assertions pour vérifier que les invoices du fournisseur sont correctement récupérées
-            assertEquals(2, invoices.size());
-        }*/
 
 
 
-     /*  @Test
-        public void testAssignOperatorToInvoice() {
-            Long operatorId = 1L;
-            Long invoiceId = 2L;
-            Operator operator = new Operator();
-            Invoice invoice = new Invoice();
 
-            // Configurez le comportement du mock OperatorRepository et InvoiceRepository
-            when(operatorRepository.findById(operatorId)).thenReturn(Optional.of(operator));
-            when(invoiceRepository.findById(invoiceId)).thenReturn(Optional.of(invoice));
 
-            // Appelez la méthode pour assigner l'opérateur à l'invoice
-            invoiceService.assignOperatorToInvoice(operatorId, invoiceId);
-
-            // Obtenez la liste des factures de l'opérateur
-            Set<Invoice> operatorInvoices = operator.getInvoices();
-
-            // Effectuez des assertions pour vérifier que l'opérateur est correctement assigné à l'invoice
-            assertTrue(operatorInvoices.contains(invoice));
-        }*/
 
 
 

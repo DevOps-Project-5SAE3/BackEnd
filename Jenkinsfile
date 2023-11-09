@@ -19,7 +19,7 @@ pipeline {
 }
 stage('tests JUnit Mockito') {
             steps {
-                sh "mvn test"  
+                sh "mvn test"
 
                 sh "mvn jacoco:report"
             }
@@ -44,6 +44,16 @@ stage('Run Sonar')  {
                     sh "mvn deploy -DskipTests"
                 }
             }
+            stage('Docker Build and Push') {
+                                   steps {
+                                           withDockerRegistry([credentialsId: "docker", url: ""]) {
+                     			  sh 'printenv'
+                    			  sh 'docker build -t salmaaz01/devopsproject .'
+            	 			  sh 'docker tag salmaaz01/kaddemproject salmaaz01/devopsproject:latest'
+                     			  sh 'docker push salmaaz01/devopsproject:latest'
+                     			}
+                 			  }
+                		}
 
 
 
