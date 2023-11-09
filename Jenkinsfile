@@ -38,16 +38,30 @@ stage('Run Sonar')  {
                     sh "mvn deploy -DskipTests"
                 }
             }
-            stage('Docker Build and Push') {
-                                   steps {
-                                           withDockerRegistry([credentialsId: "docker", url: "https://hub.docker.com/u/salmaaz"]) {
-                     			  sh 'printenv'
-                    			  sh 'docker build -t salmaaz01/devopsproject .'
-            	 			  sh 'docker tag salmaaz01/devopsproject salmaaz01/devopsproject:latest'
-                     			  sh 'docker push salmaaz01/devopsproject:latest'
-                     			}
-                 			  }
-                		}
+
+        stage('Image Docker Creation') {
+                	   steps {
+                		 script {
+                			// Generating image from Dockerfile
+                			  sh 'docker build -t salmaaz/devops_project_2.1.jar .'
+                			}
+                		 }
+                	    }
+
+        stage('Testing DockerHub') {
+                    steps {
+                     script {
+                    // Define your Docker access token
+                          def dockerAccessToken = 'dckr_pat_9QHNOif1fB_woh2c-EZLwRyNQNM'
+
+                    // Log in to Docker Hub with --password-stdin
+                            sh "echo '${dockerAccessToken}' | docker login -u salmaaz --password-stdin"
+                    // Tag and push the Docker image
+
+                            sh "docker push salmaaz/devops_project_2.1.jar"
+                    }
+                    }
+                }
 
 
 
