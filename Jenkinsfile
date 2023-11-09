@@ -27,7 +27,7 @@ pipeline {
 
         stage('JUNIT TEST') {
                 steps {
-                    sh 'mvn clean test jacoco:report'
+                    sh 'mvn test jacoco:report'
                 }
         }
 
