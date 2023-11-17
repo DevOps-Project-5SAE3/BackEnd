@@ -28,3 +28,6 @@ services:
 secrets:
   db_password_secret:
     external: true
+
+volumes:
+  db:
