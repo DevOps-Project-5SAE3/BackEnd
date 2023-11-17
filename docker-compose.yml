@@ -16,7 +16,7 @@ services:
   backend:
     depends_on:
       - mysqldb
-    build: ./
+    image: fedii97/devopsproject-0.0.1.jar
     restart: on-failure
     ports:
       - "8090:8089"
