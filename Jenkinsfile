@@ -59,7 +59,7 @@ pipeline {
         }
         stage('Docker compose') {
                     steps {
-                        sh 'docker-compose -f docker-compose.yml up -d --build'
+                    sh 'docker stack deploy -c docker-compose.yml my_stack'
                     }
                 }
         stage('Prometheus And Grafana'){
