@@ -40,7 +40,7 @@ pipeline {
         	   steps {
         		 script {
         			// Generating image from Dockerfile
-        			  sh 'docker build -t fedii97/devopsproject-0.0.1.jar .'
+        			  sh 'docker build -t fedii97/devopsproject:0.0.1 .'
         			}
         		 }
         	    }
