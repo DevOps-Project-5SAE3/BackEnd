@@ -54,7 +54,7 @@ pipeline {
                 }
 
                 // Push the Docker image to Docker Hub
-                sh "docker push fedii97/devopsproject-0.0.1.jar"
+                sh "docker push fedii97/devopsproject:0.0.1"
             }
         }
         stage('Docker compose') {
@@ -69,9 +69,9 @@ pipeline {
                 	    sh "docker start grafana"
                 		}
                 	}
-        
-       
-    
+
+
+
     }
      post{
         always{
@@ -81,5 +81,5 @@ pipeline {
             attachmentsPattern: '*.csv'
         }
     }
-     
+
 }
